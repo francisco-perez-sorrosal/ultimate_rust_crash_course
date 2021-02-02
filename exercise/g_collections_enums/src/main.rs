@@ -10,10 +10,23 @@
 //
 // You will need to complete 1b as well before you will be able to run this program successfully.
 
+enum Shot {
+    Bullseye,
+    Hit(f64),
+    Miss,
+}
+
 impl Shot {
     // Here is a method for the `Shot` enum you just defined.
     fn points(self) -> i32 {
         // 1b. Implement this method to convert a Shot into points
+        match self {
+            Shot::Bullseye => 5,
+            Shot::Hit(x) => {
+                if x < 3.0 { 2 } else { 1 }
+            },
+            Shot::Miss => 0,
+        }
         // - return 5 points if `self` is a `Shot::Bullseye`
         // - return 2 points if `self` is a `Shot::Hit(x)` where x < 3.0
         // - return 1 point if `self` is a `Shot::Hit(x)` where x >= 3.0
@@ -34,11 +47,25 @@ fn main() {
     //      - Less than 1.0 -- `Shot::Bullseye`
     //      - Between 1.0 and 5.0 -- `Shot::Hit(value)`
     //      - Greater than 5.0 -- `Shot::Miss`
+    for coord in arrow_coords {
+        coord.print_description();
+        let dist_fc = coord.distance_from_center();
+        let shot = if dist_fc <= 1.0 {
+            Shot::Bullseye
+        } else if dist_fc <= 5.0 {
+            Shot::Hit(dist_fc)
+        } else {
+            Shot::Hit(dist_fc)
+        };
+        shots.push(shot);
 
+    }
 
     let mut total = 0;
     // 3. Finally, loop through each shot in shots and add its points to total
-
+    for shot in shots {
+        total += shot.points();
+    }
     println!("Final point total is: {}", total);
 }
 
