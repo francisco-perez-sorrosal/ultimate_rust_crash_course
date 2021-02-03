@@ -24,9 +24,9 @@ fn add(arg1: &i32, arg2: &i32) -> i32 {
     arg1 + arg2
 }
 
-// fn add1(arg1: i32, arg2: i32) -> i32 {
-//     arg1 + arg2
-// }
+fn add1(arg1: i32, arg2: i32) -> i32 {
+    arg1 + arg2
+}
 
 fn main() {
     // This fancy stuff either gets the first argument as a String, or prints
@@ -70,5 +70,5 @@ fn main() {
 
     let (v1, v2): (i32, i32) = (1, 2);
     println!("1 + 2 = {}, even via references", add(&v1, &v2));
-    // println!("1 + 2 = {}, even via references", add1(*v1, *v2));
+    println!("1 + 2 = {}, even via regular vars", add1(v1, v2));
 }
